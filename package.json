@@ -1,0 +1,29 @@
+{
+  "name": "tasklist-server",
+  "version": "1.0.0",
+  "description": "Backend for the tasklist exercise",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morexlt/tasklist-server.git"
+  },
+  "author": "Martin Moreira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/morexlt/tasklist-server/issues"
+  },
+  "homepage": "https://github.com/morexlt/tasklist-server#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
+  }
+}
