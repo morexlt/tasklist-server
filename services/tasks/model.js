@@ -1,31 +1,48 @@
 'use-strict';
 
-const tasks = [{
-  uuid: '48f9ca48-171f-43a9-8f6e-46ad6c7e7d88',
-  title: `Slow-carb semiotics kale chips normcore, 
-  bicycle rights activated charcoal affogato bitters taiyaki.`,
-}, {
-  uuid: 'c336a3e1-8704-430b-8de0-da192bd94940',
-  title: 'Distillery franzen fam, semiotics mustache PBR&B jianbing',
-}, {
-  uuid: '0a5ed035-9cb7-42a8-b184-c55f5141b532',
-  title: 'Hexagon street art narwhal glossier, wayfarers pour-over adaptogen swag pop-up deep v.',
-}, {
-  uuid: '2c088682-66fb-4b97-962c-fa81f1728e16',
-  title: `VHS franzen narwhal, jianbing authentic cloud bread 
-  chicharrones 90's mumblecore blog edison bulb prism seitan cardigan.`,
-}, {
-  uuid: '40884386-dac1-4bc9-9476-f38026937b67',
-  title: 'Slow-carb vape austin bicycle rights pug chartreuse fashion axe.',
-}];
+const tasksRepository = require('../../repositories/tasks');
+const hipsumAPI = require('../../utils/externalApiHipsum');
 
-const getAll = () => {
-  console.log('getAll tasks');
-  return tasks;
+/**
+ * Get from the API 'quantity' records and store them in the Database
+ * @param {number} quantity - Tasks to fetch
+ * @returns {array} - Array of tasks inserted in the Database
+ *
+ */
+const getAndStore = async (quantity) => {
+  const tasksFetched = await hipsumAPI.get(quantity);
+  const newTasks = await tasksRepository.bulkInsert(tasksFetched);
+  return newTasks;
 };
 
-const update = async (id) => {
-  console.log(`update task ${id}`);
+/**
+ * Get from the Database the 'limit' amount of tasks
+ * if there is not enough records, get them from the api and store them
+ * @param {number} filters - Filters to the Database
+ * @returns {array} - Array of tasks
+ *
+ */
+const getAll = async (filters) => {
+  let allTasks = await tasksRepository.findAll(filters);
+  if (allTasks.length === 0) {
+    allTasks = await getAndStore(filters.limit);
+  } else if (allTasks.length < filters.limit) {
+    const difference = filters.limit - allTasks.length;
+    const newTasks = await getAndStore(difference);
+    allTasks = allTasks.concat(newTasks);
+  }
+  return allTasks;
+};
+
+/**
+ * Update one task
+ * @param {uuid} uuid - Uuid from the task
+ * @param {object} data - Data to update
+ *
+ */
+const update = async (uuid, data) => {
+  console.log(`update task ${uuid}`);
+  await tasksRepository.update(uuid, data);
 };
 
 module.exports = {

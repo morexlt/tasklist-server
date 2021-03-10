@@ -3,8 +3,9 @@
 const Tasks = require('./model');
 
 const getAll = async (req, res, next) => {
+  const { limit } = req.query;
   try {
-    const tasks = Tasks.getAll;
+    const tasks = await Tasks.getAll({ limit });
     res.status(200).json(tasks);
   } catch (error) {
     console.error(error);
@@ -14,8 +15,9 @@ const getAll = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const { id } = req.params;
+  const data = req.body;
   try {
-    await Tasks.update(id);
+    await Tasks.update(id, data);
     res.status(204).send();
   } catch (error) {
     console.error(error);
