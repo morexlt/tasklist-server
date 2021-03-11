@@ -3,7 +3,6 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const cors = require('cors');
-require('dotenv').config();
 const tasks = require('./services/tasks/routes');
 const config = require('./config');
 const { Connection } = require('./database/mongodb');
@@ -17,7 +16,7 @@ app.use(cors({ origin: config.allowedOrigins }));
 
 app.use('/tasks', tasks);
 
-app.listen(config.port, async () => {
+module.exports = app.listen(config.port, async () => {
   try {
     await Connection.connect();
     console.log(`Tasklist backend listening on port ${config.port}!`);

@@ -11,7 +11,7 @@ const parseTasks = require('./tasksUtils');
  * @returns {array} - Array of tasks parsed
  *
  */
-const get = async (sentences, type = 'hipster-centric') => {
+const get = async (sentences = 3, type = 'hipster-centric') => {
   let tasks;
   const hipsumAPI = axios.create({
     baseURL: config.hipsumAPI,
