@@ -19,7 +19,7 @@ Project is created with:
 * [mongo](https://github.com/mongodb/node-mongodb-native): 3.6.3
 * [uuid](https://github.com/uuidjs/uuid): 8.2.0
 * [dotenv](https://github.com/motdotla/dotenv): 8.2.0
-
+**Important:** To make the nodejs container wait until the mongodb container is up **and ready** i used a sh script called [wait-for-it.sh](https://github.com/vishnubob/wait-for-it).
 	
 ## Only Run
 To only run this project, we need docker and docker-compose installed
