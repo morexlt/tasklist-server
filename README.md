@@ -9,7 +9,7 @@
 * [Test](#test)
 
 ## General info
-This project is the BackEnd of the Tasklist Chalenge
+This project is the BackEnd of the Tasklist Challenge
 	
 ## Technologies
 Project is created with:
@@ -31,7 +31,7 @@ To only run this project, we need docker and docker-compose installed
 First clone the project
 ```bash
 git clone https://github.com/morexlt/tasklist-server
-cd ../tasklist-server
+cd tasklist-server
 ```
 Then you can only run the server:
 ```bash
@@ -54,8 +54,11 @@ docker-compose -f docker-compose.yml -f docker-compose.withClient.yml up
 Then go to [http://localhost:3000](http://localhost:3000)
 
 ## Setup
-To run this project localy without using docker we need npm
+To run this project localy without using npm we need a mongo server running
 
+```bash
+docker run --name mongodb -p 27017:27017 -d mongo:latest
+```
 First clone the project
 ```bash
 git clone https://github.com/morexlt/tasklist-server
@@ -63,8 +66,19 @@ cd ../tasklist-server
 ```
 Then install dependencies
 ```bash
-nvm use
+nvm install
+```
+```bash
 cp .env.example .env
+```
+In order to use the extenal mongodb we need to change in .env the next variable
+
+
+```bash
+MONGODB_URL=localhost
+```
+Finally
+```bash
 npm install
 npm start
 ```
@@ -73,7 +87,7 @@ npm start
 To test this project you need to run this commands
 
 ```bash
-nvm use
+nvm install
 cp .env.example .env
 npm install
 npm run test
