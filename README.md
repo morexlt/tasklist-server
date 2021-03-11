@@ -64,6 +64,7 @@ cd ../tasklist-server
 Then install dependencies
 ```bash
 nvm use
+cp .env.example .env
 npm install
 npm start
 ```
@@ -73,6 +74,7 @@ To test this project you need to run this commands
 
 ```bash
 nvm use
+cp .env.example .env
 npm install
 npm run test
 ```
