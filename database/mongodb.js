@@ -15,6 +15,23 @@ class Connection {
       const client = await MongoClient.connect(this.url, this.options);
       const db = client.db(this.dbName);
       this.db = db;
+
+      this.db
+        .listCollections({ name: 'tasks' })
+        .next(async (err, collection) => {
+          if (err) {
+            throw new Error(
+              'There is a problem with de Database',
+            );
+          }
+          if (!collection) {
+            try {
+              await db.createCollection('timezones');
+            } catch (error) {
+              console.error('The collection already exist');
+            }
+          }
+        });
     } catch (error) {
       console.error(error);
       throw new Error('Error when trying to connect with DB');
