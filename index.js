@@ -6,6 +6,7 @@ const cors = require('cors');
 const tasks = require('./services/tasks/routes');
 const config = require('./config');
 const { Connection } = require('./database/mongodb');
+const { handleError } = require('./helpers/error');
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.use(bodyparser.json());
 app.use(cors({ origin: config.allowedOrigins }));
 
 app.use('/tasks', tasks);
+
+app.use(handleError);
 
 module.exports = app.listen(config.port, async () => {
   try {

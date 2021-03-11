@@ -2,7 +2,7 @@
 
 const tasksRepository = require('../../repositories/tasks');
 const hipsumAPI = require('../../utils/externalApiHipsum');
-
+const { ErrorHandler } = require('../../helpers/error');
 /**
  * Get from the API 'quantity' records and store them in the Database
  * @param {number} quantity - Tasks to fetch
@@ -24,12 +24,18 @@ const getAndStore = async (quantity) => {
  */
 const getAll = async (filters) => {
   let allTasks = await tasksRepository.findAll(filters);
-  if (allTasks.length === 0) {
-    allTasks = await getAndStore(filters.limit);
-  } else if (allTasks.length < filters.limit) {
-    const difference = filters.limit - allTasks.length;
-    const newTasks = await getAndStore(difference);
-    allTasks = allTasks.concat(newTasks);
+  try {
+    if (allTasks.length === 0) {
+      allTasks = await getAndStore(filters.limit);
+    } else if (allTasks.length < filters.limit) {
+      const difference = filters.limit - allTasks.length;
+      const newTasks = await getAndStore(difference);
+      allTasks = allTasks.concat(newTasks);
+    }
+  } catch (error) {
+    console.log('Error getAll task model');
+    console.log(error);
+    throw error;
   }
   return allTasks;
 };
@@ -42,7 +48,13 @@ const getAll = async (filters) => {
  */
 const update = async (uuid, data) => {
   console.log(`update task ${uuid}`);
-  await tasksRepository.update(uuid, data);
+  try {
+    await tasksRepository.update(uuid, data);
+  } catch (error) {
+    console.log('Error update task model');
+    console.log(error);
+    throw error;
+  }
 };
 
 module.exports = {

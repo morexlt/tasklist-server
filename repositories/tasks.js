@@ -1,6 +1,7 @@
 'use-strict';
 
 const { Connection } = require('../database/mongodb');
+const { ErrorHandler } = require('../helpers/error');
 
 const getCollection = () => Connection.db.collection('tasks');
 
@@ -17,8 +18,9 @@ const findAll = async (filters) => {
     const tasksCollection = getCollection();
     allTasks = await tasksCollection.find().limit(limit).toArray();
   } catch (error) {
-    console.error('Error');
+    console.error('Error findAll task respository');
     console.error(error);
+    throw new ErrorHandler(500, 'There is a Problem with the Database');
   }
   return allTasks;
 };
@@ -43,8 +45,9 @@ const update = async (uuid, data) => {
     );
     updatedTask = result.value;
   } catch (error) {
-    console.error('Error');
+    console.error('Error update task respository');
     console.error(error);
+    throw new ErrorHandler(500, 'There is a Problem updating the task');
   }
   return updatedTask;
 };
@@ -62,8 +65,9 @@ const bulkInsert = async (tasks) => {
     const insertResult = await tasksCollection.insertMany(tasks);
     insertedObjects = insertResult.ops;
   } catch (error) {
-    console.error('Error');
+    console.error('Error bulkInsert task respository');
     console.error(error);
+    throw new ErrorHandler(500, 'There is a Problem inserting all the records');
   }
   return insertedObjects;
 };
