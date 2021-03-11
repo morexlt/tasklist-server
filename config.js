@@ -8,6 +8,7 @@ const {
   MONGODB_PORT,
   MONGODB_DATABASE_NAME,
   HIPSUM_API_URL,
+  ALLOWED_ORIGINS,
 } = process.env;
 
 const config = {
@@ -18,6 +19,7 @@ const config = {
   mongodbPort: MONGODB_PORT,
   mongodbDatabaseName: MONGODB_DATABASE_NAME,
   hipsumAPI: HIPSUM_API_URL,
+  allowedOrigins: ALLOWED_ORIGINS || 'http://localhost:3000',
 };
 
 module.exports = config;
