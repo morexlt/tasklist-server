@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "airbnb-base",
+  ],
+  "env": {
+    "node": true,
+    "mocha": true,
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "mocha": "script",
+  },
+  "rules": {
+    "strict": ["error", "global"],
+    "no-trailing-spaces": ["error", { "skipBlankLines": true }],
+    "max-len": ["error", { "code": 100 }],
+    "no-console": 0
+  }
+}
