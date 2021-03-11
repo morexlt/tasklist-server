@@ -18,8 +18,12 @@ Project is created with:
 * [cors](https://github.com/expressjs/cors) 2.8.5
 * [mongo](https://github.com/mongodb/node-mongodb-native): 3.6.3
 * [uuid](https://github.com/uuidjs/uuid): 8.2.0
-* [dotenv](https://github.com/motdotla/dotenv): 8.2.0
-**Important:** To make the nodejs container wait until the mongodb container is up **and ready** i used a sh script called [wait-for-it.sh](https://github.com/vishnubob/wait-for-it).
+* [dotenv](https://github.com/motdotla/dotenv) 8.2.0
+
+
+* [wait-for-it.sh](https://github.com/vishnubob/wait-for-it) 
+We need this script because as docker-compose it waits only for the container to be created and not for the service to be ready. This script waits for mongo to start normally so that the Backend can connect.
+
 	
 ## Only Run
 To only run this project, we need docker and docker-compose installed
