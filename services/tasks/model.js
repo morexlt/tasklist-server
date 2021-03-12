@@ -33,8 +33,8 @@ const getAll = async (filters) => {
       allTasks = allTasks.concat(newTasks);
     }
   } catch (error) {
-    console.log('Error getAll task model');
-    console.log(error);
+    console.error('Error getAll task model');
+    console.error(error);
     throw error;
   }
   return allTasks;
