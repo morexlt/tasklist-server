@@ -25,7 +25,7 @@ const get = async (sentences = 3, type = 'hipster-centric') => {
     });
     tasks = parseTasks(response.data[0]);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
   return tasks;
 };
