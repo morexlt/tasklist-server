@@ -51,8 +51,8 @@ const update = async (uuid, data) => {
   try {
     await tasksRepository.update(uuid, data);
   } catch (error) {
-    console.log('Error update task model');
-    console.log(error);
+    console.error('Error update task model');
+    console.error(error);
     throw error;
   }
 };
