@@ -45,7 +45,7 @@ First clone the project
 ```bash
 git clone https://github.com/morexlt/tasklist-server
 git clone https://github.com/morexlt/tasklist-client
-cd ../tasklist-server
+cd tasklist-server
 ```
 Then you can only run the all:
 ```bash
@@ -62,7 +62,7 @@ docker run --name mongodb -p 27017:27017 -d mongo:latest
 First clone the project
 ```bash
 git clone https://github.com/morexlt/tasklist-server
-cd ../tasklist-server
+cd tasklist-server
 ```
 Then install dependencies
 ```bash
